@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me</title>
+  <meta name="description" content="A clean and simple About Me" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --ring: #a7f3d0;
+      --accent: #10b981; /* soft green accent */
+      --chip-bg: #edfdf6;
+      --chip-text: #065f46;
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
+      --radius: 18px;
+    }
+    .dark {
+      --bg: #0b1220;
+      --card: #0f172a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --ring: #064e3b;
+      --accent: #34d399;
+      --chip-bg: #0d1b15;
+      --chip-text: #a7f3d0;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(16,185,129,0.08), transparent),
+                  radial-gradient(1000px 500px at 120% 20%, rgba(16,185,129,0.06), transparent),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Layout */
+    .wrap {
+      max-width: 1200px; /* wider layout */
+      margin: 48px auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      display: grid;
+      grid-template-columns: 112px 1fr auto;
+      gap: 22px;
+      align-items: center;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid rgba(16,185,129,0.15);
+      position: sticky;
+      top: 12px;
+      z-index: 3;
+    }
+    .avatar {
+      width: 96px; height: 96px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 2px solid rgba(16,185,129,0.2);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .title { margin: 0; font-size: 28px; letter-spacing: -0.02em; }
+    .tagline { margin: 4px 0 0; color: var(--muted); font-weight: 500; }
+
+    .actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      appearance: none; border: 0; background: var(--text); color: var(--bg);
+      padding: 10px 14px; border-radius: 12px; font-weight: 600; cursor: pointer;
+      transition: transform .06s ease, filter .2s ease; box-shadow: var(--shadow);
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn:active { transform: translateY(1px); }
+    .btn-ghost {
+      background: transparent; color: var(--text); border: 1px solid rgba(148,163,184,.35);
+    }
+
+    /* Cards */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 18px; }
+    @media (min-width: 860px) {
+      .grid { grid-template-columns: 2fr 1fr; } /* wider left column */
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(16,185,129,0.12);
+    }
+    .card h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: -0.02em; }
+    .muted { color: var(--muted); }
+
+    /* Chips */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: var(--chip-bg); color: var(--chip-text);
+      border-radius: 999px; padding: 8px 12px; font-weight: 600; font-size: 13px;
+      border: 1px dashed rgba(16,185,129,0.35);
+    }
+
+    /* List */
+    .list { display: grid; gap: 10px; }
+    .row {
+      background: linear-gradient(0deg, rgba(16,185,129,0.05), rgba(16,185,129,0.05)) no-repeat left / 4px 100%, var(--card);
+      border-radius: 14px; padding: 14px 14px 14px 18px;
+      border: 1px solid rgba(16,185,129,0.12);
+    }
+
+    /* Footer */
+    .footer { text-align: center; margin: 28px 0 8px; color: var(--muted); font-size: 14px; }
+    .link { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 2px; font-weight: 600; }
+
+    /* Tooltip */
+    .tip { position: relative; }
+    .tip:hover::after {
+      content: attr(data-tip);
+      position: absolute; top: -38px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: var(--bg); padding: 6px 10px; border-radius: 8px; font-size: 12px; white-space: nowrap;
+      box-shadow: var(--shadow);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Header / Hero -->
+    <header class="header">
+      <div class="avatar">
+        <img id="avatar" alt="Avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=400&auto=format&fit=crop" />
+      </div>
+      <div>
+        <h1 class="title" id="name">Your Name</h1>
+        <p class="tagline" id="tagline">Short tagline • Role • Location</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost tip" id="themeBtn" data-tip="Toggle theme (T)">Toggle Theme</button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="grid">
+      <section class="card">
+        <h2>About</h2>
+        <p id="bio" class="muted">Hi! I'm a totally normal human being who loves building neat things on the internet. This is a About Me made with HTML, CSS, and some JavaScript</p>
+      </section>
+
+      <aside class="card">
+        <h2>Quick Facts</h2>
+        <div class="list" id="facts"></div>
+      </aside>
+
+      <section class="card">
+        <h2>Skills & Tools</h2>
+        <div class="chips" id="skills"></div>
+      </section>
+
+      <section class="card">
+        <h2>Interests</h2>
+        <div class="chips" id="interests"></div>
+      </section>
+
+      <section class="card">
+        <h2>Now</h2>
+        <div class="list" id="now"></div>
+      </section>
+
+      <section class="card">
+        <h2>Links</h2>
+        <div class="list" id="links"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Built with ♥
+    </footer>
+  </div>
+
+  <script>
+    const data = {
+      name: "Erika/Achmat270",
+      tagline: "Not Alien • Somewhere on Earth",
+      avatar: "https://images.unsplash.com/photo-1477511801984-4ad318ed9846?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      bio: `Hello! I like making small projects and learning new things every week. 
+I enjoy clean UI, code, and games with over 1M downloads.`,
+      skills: ["Nothing?"],
+      interests: ["Food"],
+      facts: [
+        { label: "Based on", value: "Planet Earth" },
+        { label: "Favorite vibe", value: "Minimal + Desaturated Pink :3" },
+        { label: "Pronounced", value: "Ah-mat (NO C!!!)" },
+      ],
+      now: [
+        { label: "Learning", value: "German & game dev" },
+        { label: "Playing", value: "Plants Vs. Zombies & Geometry Dash" },
+        { label: "Watching", value: "YuruYuri" },
+      ],
+      links: [
+        { label: "GitHub", href: "https://github.com/" },
+        { label: "YouTube", href: "https://youtube.com/ErikaOrNot" },
+        { label: "Favourite Songs", href: "Erika, Daisy Bell and Loli God Requiem" },
+      ],
+    };
+
+    function el(tag, className, text) {
+      const e = document.createElement(tag);
+      if (className) e.className = className;
+      if (text) e.textContent = text;
+      return e;
+    }
+
+    function render() {
+      document.getElementById('name').textContent = data.name;
+      document.getElementById('tagline').textContent = data.tagline;
+      document.getElementById('avatar').src = data.avatar;
+      document.getElementById('bio').textContent = data.bio;
+
+      const skills = document.getElementById('skills');
+      skills.innerHTML = '';
+      data.skills.forEach(s => skills.appendChild(el('span', 'chip', s)));
+
+      const interests = document.getElementById('interests');
+      interests.innerHTML = '';
+      data.interests.forEach(s => interests.appendChild(el('span', 'chip', s)));
+
+      const facts = document.getElementById('facts');
+      facts.innerHTML = '';
+      data.facts.forEach(({label, value}) => {
+        const row = el('div', 'row');
+        row.appendChild(el('div', 'muted', label));
+        const b = el('div'); b.style.fontWeight = '700'; b.textContent = value; row.appendChild(b);
+        row.style.display = 'grid'; row.style.gridTemplateColumns = '140px 1fr'; row.style.gap = '12px';
+        facts.appendChild(row);
+      });
+
+      const now = document.getElementById('now');
+      now.innerHTML = '';
+      data.now.forEach(({label, value}) => {
+        const row = el('div', 'row');
+        row.appendChild(el('div', 'muted', label));
+        const b = el('div'); b.style.fontWeight = '700'; b.textContent = value; row.appendChild(b);
+        row.style.display = 'grid'; row.style.gridTemplateColumns = '140px 1fr'; row.style.gap = '12px';
+        now.appendChild(row);
+      });
+
+      const links = document.getElementById('links');
+      links.innerHTML = '';
+      data.links.forEach(({label, href}) => {
+        const a = el('a', 'row');
+        a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.style.display = 'flex'; a.style.justifyContent = 'space-between'; a.style.alignItems = 'center'; a.style.textDecoration = 'none'; a.style.color = 'inherit';
+        const l = el('div'); l.style.fontWeight = '700'; l.textContent = label; a.appendChild(l);
+        const r = el('div', 'muted', href.replace(/^https?:\/\//, '')); a.appendChild(r);
+        links.appendChild(a);
+      });
+    }
+
+    // Light mode by default
+    document.documentElement.classList.remove('dark');
+
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 't') themeBtn.click();
+    });
+
+    render();
+  </script>
+</body>
+</html>
