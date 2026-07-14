@@ -32,14 +32,14 @@ I enjoy clean UI, code, and games with over 1M downloads.
 ## Now
 - **Learning:** German & game dev  
 - **Playing:** Plants Vs. Zombies & Geometry Dash  
-- **Watching:** YuruYuri  
+- **Watching:** Nothing atm  
 
 ---
 
 ## Links
 - [GitHub](https://github.com/)  
 - [YouTube](https://youtube.com/ErikaOrNot)  
-- Favourite Songs: Erika, Daisy Bell and Loli God Requiem (I'm normal, Trust me bro)  
+- Favourite Songs: Idk anymore
 
 ---
 
